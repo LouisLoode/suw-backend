@@ -1,0 +1,12 @@
+### macOS ###
+*.DS_Store
+.AppleDouble
+.LSOverride
+.idea
+
+# Docker configuration
+
+# Ignore bundler config.
+/node-app/.bundle
+/node-app/node_modules
+/node-app/npm-debug.log
