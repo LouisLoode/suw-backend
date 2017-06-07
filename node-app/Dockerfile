@@ -10,7 +10,7 @@ ADD . /api
 WORKDIR /api
 
 # Install dependencies
-RUN npm install --production
+RUN npm install
 
 # Expose our server port.
 EXPOSE 3000
