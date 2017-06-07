@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 // import BlueBird from 'bluebird';
 
-// console.log(Config.mongodb);
+// console.log(config.mongodb);
 module.exports = function(config) {
   // connect mongo
   mongoose.Promise = global.Promise;
   // mongoose.Promise = BlueBird;
-  mongoose.connect(Config.mongodb);
+  mongoose.connect(config.mongodb);
 
   // When successfully connected
   mongoose.connection.on('connected', () => {
 
-      console.log('mongoose default connection open to ' + Config.mongodb);
+      console.log('mongoose default connection open to ' + config.mongodb);
 
   });
 
