@@ -1,6 +1,8 @@
 // app.js
 const http = require('http');
 const express = require('express');
+const glob = require('glob');
+const path = require('path');
 const config = require('./config/config');
 const app = express();
 
@@ -8,16 +10,36 @@ const server = http.createServer(app);
 // Pass a http.Server instance to the listen method
 const io = require('socket.io').listen(server);
 
-// Database
+/**
+ * Connexion to mongodb
+ */
 require('./config/database')(config);
 
-// Middlewares
+/**
+ * Import models
+ */
+glob.sync('models/*.js', {
+    root: __dirname,
+    ignore: 'models/**/*.spec.js'
+}).forEach((file) => {
+
+    require(path.join(__dirname, file));
+
+});
+
+/**
+ * Import middlewares
+ */
 require('./config/middlewares')(app, config, server);
 
-// Routes
+/**
+ * Import des routes
+ */
 require('./routes')(app, express);
 
-// Sockets
+/**
+ * Import des sockets
+ */
 require('./sockets')(io);
 
 console.log('Running in ' + (process.env.NODE_ENV || 'development') + ' mode @ ' + config.api.url);
