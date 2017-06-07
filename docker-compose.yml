@@ -1,15 +1,21 @@
 version: '2'
 services:
-  app:
-    build: .
-    depends_on:
-      - mongodb
-    volumes:
-      - ".:/api"
-    ports:
-      - 3000:3000
-
   mongodb:
-    image: mongo
+    image: mongo:3.4.3
     ports:
         - "27017:27017"
+    restart: always
+    volumes:
+      - "../mongo_data:/data/db"
+
+  app:
+    build: ./node-app
+    depends_on:
+      - mongodb
+    restart: always
+    volumes:
+      - "./node-app:/api"
+    ports:
+      - 3000:3000
+    environment:
+      - COMPOSE_HTTP_TIMEOUT=200

@@ -7,6 +7,7 @@
 # Docker configuration
 
 # Ignore bundler config.
-/.bundle
-node_modules
-npm-debug.log
+/node-app/.bundle
+/node-app/node_modules
+/node-app/npm-debug.log
+/node-app/config/config.env

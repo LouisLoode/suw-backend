@@ -15,5 +15,17 @@ $ docker-compose up --build
 Down in dev mode
 
 ```sh
-$ docker-compose -f down
+$ docker-compose down
+```
+
+Up in production mode
+
+```sh
+$ docker-compose -f docker-compose.yml -f production.yml up --build
+```
+
+Down in production mode
+
+```sh
+$ docker-compose -f docker-compose.yml -f production.yml down
 ```
