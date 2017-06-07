@@ -6,7 +6,7 @@ services:
         - "27017:27017"
     restart: always
     volumes:
-      - "../mongo_data:/data/db"
+      - "../../mongo_data:/data/db"
 
   app:
     build: ./node-app
