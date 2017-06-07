@@ -18,11 +18,20 @@ const UserSchema = new Schema({
     manufacturer: {
         type: String
     },
-    device_name: {
+    local: {
         type: String
     },
-    locale: {
+    timezone: {
         type: String
+    },
+    os_version: {
+        type: Number
+    },
+    build_number: {
+        type: Number
+    },
+    is_tablet: {
+        type: Boolean
     },
     location: {
       type: [Number],  // [<longitude>, <latitude>]

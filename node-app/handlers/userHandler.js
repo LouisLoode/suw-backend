@@ -17,8 +17,12 @@ const userHandler = {
             model: req.body.model,
             system: req.body.system,
             manufacturer: req.body.manufacturer,
-            device_name: req.body.device_name,
-            locale: req.body.locale,
+            brand: req.body.brand,
+            local: req.body.local,
+            timezone: req.body.timezone,
+            os_version: req.body.os_version,
+            build_number: req.body.build_number,
+            is_tablet: req.body.is_tablet,
             location: [req.body.longitude, req.body.latitude]
           },
           options = { upsert: true, new: true, setDefaultsOnInsert: true };
