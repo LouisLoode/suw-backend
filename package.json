@@ -7,10 +7,6 @@
     "type": "git",
     "url": "git://github.com/LouisLoode/api-yummytime.git"
   },
-  "engines": {
-    "node": "6.11.0",
-    "npm": "3.10.10"
-  },
   "scripts": {
     "start": "nodemon app.js"
   },
