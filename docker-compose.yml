@@ -1,11 +1,11 @@
 version: '2'
 services:
   app:
-    build: ./node-app
+    build: .
     depends_on:
       - mongodb
     volumes:
-      - "./node-app:/api"
+      - ".:/api"
     ports:
       - 3000:3000
 
