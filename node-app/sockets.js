@@ -1,20 +1,20 @@
-module.exports = function(io) {  
+module.exports = function(io, config) {
   // Handle connection
-  io.on('connection', function (socket) {
-      console.log('Connected succesfully to the socket ...');
+  config.nbr_users = 0;
 
-      const news = [
-          { title: 'The cure of the Sadness is to play Videogames',date:'04.10.2016'},
-          { title: 'Batman saves Racoon City, the Joker is infected once again',date:'05.10.2016'},
-          { title: 'Deadpool doesn\'t want to do a third part of the franchise',date:'05.10.2016'},
-          { title: 'Quicksilver demand Warner Bros. due to plagiarism with Speedy Gonzales',date:'04.10.2016'},
-      ];
+  io.on('connection', function(socket){
+    config.nbr_users += 1;
+    console.log('user connected succesfully to the socket ...');
 
-      // Send news on the socket
-      socket.emit('news', news);
+    socket.on('disconnect', function(){
+      config.nbr_users -= 1;
+      console.log('user disconnected');
+    });
 
-      socket.on('my other event', function (data) {
-          console.log(data);
-      });
+    // Sockets about news
+    require('./sockets/monitoring')(socket, config);
+
+    // Sockets about news
+    require('./sockets/news')(socket);
   });
 };

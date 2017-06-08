@@ -7,6 +7,9 @@ module.exports = {
     },
     mongodb: process.env.MONGODB_URI || 'mongodb://mongodb:27017/suw_backend_dev',
     key: {
-        privateKey: process.env.PRIVATE_KEY || 'YourPrivateKey',
+        privateKey: process.env.PRIVATE_KEY || 'YourPrivateKey'
+    },
+    monitoring: {
+        interval: process.env.INTERVAL_MONIT || 1000
     }
 };

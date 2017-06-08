@@ -19,4 +19,7 @@ module.exports = function(app, express) {
 
   // Expose the node_modules folder as static resources (to access socket.io.js in the browser)
   app.use('/static', express.static('node_modules'));
+
+  // Expose the node_modules folder as static resources (to access socket.io.js in the browser)
+  app.use('/assets', express.static(__dirname + '/public/assets'));
 };

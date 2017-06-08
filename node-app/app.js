@@ -40,6 +40,6 @@ require('./routes')(app, express);
 /**
  * Import des sockets
  */
-require('./sockets')(io);
+require('./sockets')(io, config);
 
 console.log('Running in ' + (process.env.NODE_ENV || 'development') + ' mode @ ' + config.api.url);
