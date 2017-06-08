@@ -9,5 +9,6 @@
 # Ignore bundler config.
 /node-app/.bundle
 /node-app/node_modules
+/node_modules
 /node-app/npm-debug.log
 /node-app/config/config.env
