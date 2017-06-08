@@ -18,6 +18,9 @@ const UserSchema = new Schema({
     manufacturer: {
         type: String
     },
+    brand: {
+        type: String
+    },
     local: {
         type: String
     },
@@ -25,7 +28,7 @@ const UserSchema = new Schema({
         type: String
     },
     os_version: {
-        type: Number
+        type: String
     },
     build_number: {
         type: Number
