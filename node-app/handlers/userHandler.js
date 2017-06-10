@@ -5,10 +5,10 @@ const Config = require('../config/config');
 const userHandler = {
 
     login(req, res) {
-        console.log('Login');
-        console.log(req.body);
+        // console.log('Login');
+        // console.log(req.body);
         if (!req.body.uuid) {
-          res.send({success: false, msg: 'Please uuid is required.'});
+          res.status(400).json({success: false, msg: 'Please uuid is required.'});
         }
         else {
           var query = { uuid: req.body.uuid },
@@ -31,14 +31,14 @@ const userHandler = {
           UserModel.findOneAndUpdate(query, update, options, function(error, result) {
               // do something with the document
               if (error) { // Impossible
-                  res.status(400).send('Failed to get data: '+error);
+                  res.status(400).json({success: false, msg: 'Failed to get data', error});
               }
               else {
                   if (result.length === 0) { // Impossible
-                      res.status(404).send('User Not Found: '+result);
+                      res.status(404).json({success: false, msg: 'User Not Found', result});
                   }
                   else {
-                      return res.send({success: true, msg: 'User Data Successfully Fetched', result});
+                      return res.status(200).json({success: true, msg: 'User Data Successfully Fetched', result});
                   }
               }
           });

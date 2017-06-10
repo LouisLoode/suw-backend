@@ -5,7 +5,7 @@ module.exports = function(app, express) {
   // Register the index route of your app that returns the HTML file
   app.get('/', function (req, res) {
       console.log('Homepage');
-      res.send('Hello world !');
+      res.status(200).json({success: true, msg: 'Hello World !'});
   });
 
   // Register the admin route of your app that returns the HTML file
