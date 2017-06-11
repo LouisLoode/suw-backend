@@ -1,14 +1,9 @@
 var socket = io(window.location.origin);
 
-socket.on('news', function (data) {
+socket.on('story', function (data) {
     var div = document.getElementById("news-list");
-    console.log("Rendering news : ",data);
-
-    for(var i = 0;i < data.length;i++){
-        var newsItem = data[i];
-        div.innerHTML += "<h3>" + newsItem.title + ' <small>'+ newsItem.date + "</small></h3><br>";
-    }
-
+    console.log("Rendering story : ",data);
+    div.innerHTML += "<h3>" + data.title + ' <small>'+ data.date + "</small></h3><br>";
     socket.emit('my other event', { my: 'data' });
 });
 

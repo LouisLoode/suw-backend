@@ -42,8 +42,10 @@ const UserSchema = new Schema({
     },
     story: [
       {
-        latitude: { type: Number },
-        longitude: { type: Number },
+        location: {
+          type: [Number],  // [<longitude>, <latitude>]
+          index: '2d'      // create the geospatial index
+        },
         altitude: { type: Number },
         speed: { type: Number },
         accuracy: { type: Number },
@@ -61,6 +63,7 @@ UserSchema.options.toJSON = {
         ret.id = ret._id;
         delete ret._id;
         delete ret.__v;
+        delete ret.story;
 
     }
 };

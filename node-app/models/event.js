@@ -21,7 +21,9 @@ const EventSchema = new Schema({
     location: {
       type: [Number],  // [<longitude>, <latitude>]
       index: '2d'      // create the geospatial index
-    }
+    },
+    upvotes: [{type: Schema.ObjectId, ref: 'User'}],
+    downvotes: [{type: Schema.ObjectId, ref: 'User'}]
 },{
     timestamps: true // Saves createdAt and updatedAt as dates. createdAt will be our timestamp.
 });

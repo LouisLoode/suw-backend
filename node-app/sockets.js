@@ -14,7 +14,7 @@ module.exports = function(io, config) {
     // Sockets about news
     require('./sockets/monitoring')(socket, config);
 
-    // Sockets about news
-    require('./sockets/news')(socket);
+    // Sockets about history
+    require('./sockets/story')(socket);
   });
 };

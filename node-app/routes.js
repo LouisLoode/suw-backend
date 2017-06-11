@@ -14,6 +14,27 @@ module.exports = function(app, express) {
       res.sendFile(__dirname + '/public/admin.html');
   });
 
+  // Register the index route of your app that returns the HTML file
+  app.get('/test', function (req, res) {
+      console.log('Test page');
+
+
+      var user_datas = {
+              location: [2.4277856, 48.8527847],  // [<longitude>, <latitude>]
+              altitude: 30,
+              speed: 8,
+              accuracy: 0.0001,
+              user_id: "59385963e589bcdb133327ba"
+            };
+
+      var result = userHandlers.updateStory(user_datas, (error, data) => {
+        console.log('error: '+error);
+
+        console.log('data: '+data);
+        res.status(200).json({success: true, msg: data});
+      });
+  });
+
   app.post('/login', userHandlers.login);
 
 

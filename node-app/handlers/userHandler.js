@@ -4,6 +4,50 @@ const Config = require('../config/config');
 
 const userHandler = {
 
+    // Configurations files
+    updateStory(data, cb) {
+
+      console.log(data);
+      console.log("user_id : "+data.user_id);
+
+      //Fetch fetch current user
+      UserModel.findOne({ _id: data.user_id }, (error, user) => {
+
+          if (error) {
+              return cb(error);
+          }
+          else {
+              if (user.length === 0) {
+                  return cb('User Not Found');
+              }
+              else {
+                 //console.log('actual equipment name in db :' + req.body.name)
+                 console.log('data ----------- begin');
+                 console.log(data);
+                 console.log('data ----------- end');
+                 user.location = [data.location[0], data.location[1]];  // [<longitude>, <latitude>]
+                 let informations = {
+                     location: [data.location[0], data.location[1]],
+                     altitude: data.altitude,
+                     speed: data.speed,
+                     accuracy: data.accuracy,
+                     date: new Date()
+                 };
+                 user.story.push(informations);
+                 // save the bear
+                 user.save(function(err) {
+                     if (err) {
+                       console.log(err);
+                       return cb('User Not Found');
+                     }else{
+                       return cb(error, user);
+                     }
+                 });
+                }
+              }
+          });
+    },
+
     login(req, res) {
         // console.log('Login');
         // console.log(req.body);
