@@ -22,9 +22,9 @@ module.exports = function(app, express) {
 
       var data = {
               limit: 10,
-              distance: 75, // in km
-              latitude: 48.8528006,
-              longitude: 2.4279927999999997
+              distance: 10, // in km
+              latitude: 48.85275120000001,
+              longitude: 2.4278817999999998
             };
 
       var result = eventHandlers.getProximityEvent(data, (error, data) => {

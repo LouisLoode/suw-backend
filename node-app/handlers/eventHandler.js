@@ -41,20 +41,29 @@ const eventHandler = {
         var maxDistance = data.distance || 75;
         // we need to convert the distance to radians
         // the raduis of Earth is approximately 6371 kilometers
-        maxDistance = maxDistance/6371;
+        var rayon = maxDistance/6371;
 
         // get coordinates [ <latitude> , <longitude> ]
-        var coords = [];
-        coords[0] = data.latitude;
-        coords[1] = data.longitude;
+        // var coords = [];
+        // coords[0] = data.latitude;
+        // coords[1] = data.longitude;
 
         // find a location
-        EventModel.find({
-          location: {
-            $geoNear: coords,
-            $maxDistance: maxDistance
+        EventModel.find(
+          // {
+          //   location: {
+          //     $geoNear: coords,
+          //     $maxDistance: maxDistance
+          //   }
+          // }
+
+          { location :
+              {
+                $geoWithin : {
+                  $centerSphere : [ [ data.latitude, data.longitude ] , rayon ] }
+              }
           }
-        }).limit(limit).exec(function(error, events) {
+      ).limit(limit).exec(function(error, events) {
           if (error) {
             console.log(error);
             return cb(error);
