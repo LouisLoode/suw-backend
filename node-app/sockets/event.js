@@ -20,8 +20,7 @@ module.exports = function(socket) {
         console.log('ERROR:');
         console.log(error);
       } else {
-        console.log("Plusieurs events:");
-        console.log(data);
+        console.log("Fetch events:"+data.length);
       }
     });
   });

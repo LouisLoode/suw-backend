@@ -38,7 +38,7 @@ const eventHandler = {
         var limit = data.limit || 15;
 
         // get the max distance or set it to 8 kilometers
-        var maxDistance = data.distance || 75;
+        var maxDistance = data.distance || 1;
         // we need to convert the distance to radians
         // the raduis of Earth is approximately 6371 kilometers
         var rayon = maxDistance/6371;
@@ -65,10 +65,10 @@ const eventHandler = {
           }
       ).limit(limit).exec(function(error, events) {
           if (error) {
-            console.log(error);
+            // console.log(error);
             return cb(error);
           }
-          console.log(events);
+          // console.log(events);
           return cb(error, events);
         });
     },

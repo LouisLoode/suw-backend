@@ -6,9 +6,8 @@ const userHandler = {
 
     // Configurations files
     updateStory(data, cb) {
-
-      console.log(data);
-      console.log("user_id : "+data.user_id);
+      // console.log(data);
+      // console.log("user_id : "+data.user_id);
 
       //Fetch fetch current user
       UserModel.findOne({ _id: data.user_id }, (error, user) => {
