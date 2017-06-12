@@ -11,5 +11,9 @@ module.exports = {
     },
     monitoring: {
         interval: process.env.INTERVAL_MONIT || 1000
+    },
+    socket: {
+        pingTimeout: process.env.SOCKET_PING_TIMEOUT || 30000,
+        pingInterval: process.env.SOCKET_PING_INTERVAL || 1000
     }
 };

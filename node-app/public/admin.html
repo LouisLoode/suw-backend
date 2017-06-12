@@ -38,7 +38,7 @@
           <a class="navbar-brand" href="#">Dashboard</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
+          <!-- <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -54,11 +54,9 @@
                 <li><a href="#">One more separated link</a></li>
               </ul>
             </li>
-          </ul>
+          </ul> -->
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li><a href="../navbar-static-top/">Static top</a></li>
-            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+            <li><a data-toggle="modal" data-target="#addEvent">Create an event</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -80,6 +78,88 @@
         <div class="col-sm-3" id="monitoring"></div>
       </div>
     </div> <!-- /container -->
+
+<!-- Modal -->
+<form action="" id="add_event">
+<div class="modal fade" id="addEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create an event</h4>
+      </div>
+      <div class="modal-body">
+        <!-- User id -->
+        <div class="form-group">
+          <label for="user_id_event">User (id)</label>
+          <input type="text" class="form-control input-lg" id="user_id_event" placeholder="59385963e589bcdb133327ba" autocomplete="off" >
+        </div>
+
+        <!-- Number of participants -->
+        <div class="form-group">
+          <label for="nbr_participant_event">Number of participants</label>
+          <input type="text" class="form-control input-lg" id="nbr_participant_event" placeholder="10" autocomplete="off" >
+        </div>
+
+        <!-- Location -->
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="latitude_event">Latitude</label>
+            <input type="text" class="form-control input-lg" id="latitude_event" placeholder="43.965689" autocomplete="off" >
+          </div>
+          <div class="form-group col-md-6">
+            <label for="longitude_event">Longitude</label>
+            <input type="text" class="form-control input-lg" id="longitude_event" placeholder="0.363740" autocomplete="off" >
+          </div>
+          <div class="form-group col-md-12">
+            <a class="btn btn-primary" onclick="getCurrentLocation()">Set to current position</a>
+          </div>
+        </div>
+
+        <!-- Type -->
+        <div class="form-group">
+          <label for="type_event">Type of event</label>
+          <select id="type_event" class="form-control input-lg">
+            <option value="misc">Miscellaneous</option>
+            <option value="party">Party</option>
+            <option value="music">Music</option>
+            <option value="food">Food</option>
+            <option value="cultural">Cultural</option>
+            <option value="incident">Incident</option>
+            <option value="sport">Sport</option>
+            <option value="waiting">Waiting</option>
+            <option value="march">March</option>
+          </select>
+        </div>
+
+        <!-- Name -->
+        <div class="form-group">
+          <label for="name_event">Name</label>
+          <input type="text" class="form-control input-lg" id="name_event" placeholder="A genious party !" autocomplete="off" >
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label for="description_event">Description</label>
+          <textarea class="form-control input-lg" id="description_event" placeholder="Lorem ipsum bolo bolo" autocomplete="off" ></textarea>
+        </div>
+
+        <!-- Hashtag -->
+        <div class="form-group">
+          <label for="hashtag_event">Hashtag</label>
+          <input type="text" class="form-control input-lg" id="hashtag_event" placeholder="myFuckingParty" autocomplete="off" >
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Create event</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

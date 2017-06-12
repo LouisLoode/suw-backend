@@ -1,4 +1,5 @@
 const userHandlers = require('./handlers/userHandler');
+const eventHandlers = require('./handlers/eventHandler');
 
 
 module.exports = function(app, express) {
@@ -19,24 +20,30 @@ module.exports = function(app, express) {
       console.log('Test page');
 
 
-      var user_datas = {
-              location: [2.4277856, 48.8527847],  // [<longitude>, <latitude>]
-              altitude: 30,
-              speed: 8,
-              accuracy: 0.0001,
-              user_id: "59385963e589bcdb133327ba"
+      var data = {
+              limit: 10,
+              distance: 75, // in km
+              latitude: 48.8528006,
+              longitude: 2.4279927999999997
             };
 
-      var result = userHandlers.updateStory(user_datas, (error, data) => {
+      var result = eventHandlers.getProximityEvent(data, (error, data) => {
         console.log('error: '+error);
-
-        console.log('data: '+data);
-        res.status(200).json({success: true, msg: data});
+        if (error){
+          res.status(500).json(error);
+        }
+        if (data.length === 0){
+          console.log("Aucun event");
+          res.status(500).json(data);
+        } else {
+          console.log("Plusieurs events");
+          console.log(data);
+          res.status(200).json(data);
+        }
       });
   });
 
   app.post('/login', userHandlers.login);
-
 
   // Expose the node_modules folder as static resources (to access socket.io.js in the browser)
   app.use('/static', express.static('node_modules'));

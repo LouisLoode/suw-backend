@@ -18,13 +18,12 @@ const userHandler = {
           }
           else {
               if (user.length === 0) {
-                  return cb('User Not Found');
+                 return cb('User Not Found');
               }
               else {
-                 //console.log('actual equipment name in db :' + req.body.name)
-                 console.log('data ----------- begin');
-                 console.log(data);
-                 console.log('data ----------- end');
+                //  console.log('data ----------- begin');
+                //  console.log(data);
+                //  console.log('data ----------- end');
                  user.location = [data.location[0], data.location[1]];  // [<longitude>, <latitude>]
                  let informations = {
                      location: [data.location[0], data.location[1]],
@@ -33,6 +32,9 @@ const userHandler = {
                      accuracy: data.accuracy,
                      date: new Date()
                  };
+                //  console.log('informations ----------- begin');
+                //  console.log(informations);
+                //  console.log('informations ----------- end');
                  user.story.push(informations);
                  // save the bear
                  user.save(function(err) {
@@ -67,7 +69,7 @@ const userHandler = {
             os_version: req.body.os_version,
             build_number: req.body.build_number,
             is_tablet: req.body.is_tablet,
-            location: [req.body.longitude, req.body.latitude]
+            location: [req.body.latitude, req.body.longitude]
           },
           options = { upsert: true, new: true, setDefaultsOnInsert: true };
 

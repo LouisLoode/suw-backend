@@ -8,7 +8,10 @@ const app = express();
 
 const server = http.createServer(app);
 // Pass a http.Server instance to the listen method
-const io = require('socket.io').listen(server);
+const io = require('socket.io').listen(server, {
+    pingTimeout: config.socket.pingTimeout,
+    pingInterval: config.socket.pingInterval
+  });
 
 /**
  * Connexion to mongodb

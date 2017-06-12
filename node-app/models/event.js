@@ -6,7 +6,11 @@ const EventSchema = new Schema({
     user_id: { type: Schema.Types.ObjectId, ref: 'User' },
     type: {
       type: String,
-      enum: ['alert', 'queue'] // <-- @TODO
+      enum: ['party', 'music', 'food', 'cultural', 'incident', 'sport', 'waiting', 'march', 'misc']
+    },
+    nbr_participant: {
+      type: Number,
+      required: true
     },
     name: {
       type: String,
@@ -20,7 +24,7 @@ const EventSchema = new Schema({
     },
     location: {
       type: [Number],  // [<longitude>, <latitude>]
-      index: '2d'      // create the geospatial index
+      index: '2dsphere'      // create the geospatial index
     },
     upvotes: [{type: Schema.ObjectId, ref: 'User'}],
     downvotes: [{type: Schema.ObjectId, ref: 'User'}]

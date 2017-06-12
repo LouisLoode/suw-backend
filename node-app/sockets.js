@@ -14,7 +14,10 @@ module.exports = function(io, config) {
     // Sockets about news
     require('./sockets/monitoring')(socket, config);
 
-    // Sockets about history
-    require('./sockets/story')(socket);
+    // Sockets about user
+    require('./sockets/user')(socket);
+
+    // Sockets about events
+    require('./sockets/event')(socket);
   });
 };

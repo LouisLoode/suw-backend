@@ -38,13 +38,13 @@ const UserSchema = new Schema({
     },
     location: {
       type: [Number],  // [<longitude>, <latitude>]
-      index: '2d'      // create the geospatial index
+      index: '2dsphere'      // create the geospatial index
     },
     story: [
       {
         location: {
           type: [Number],  // [<longitude>, <latitude>]
-          index: '2d'      // create the geospatial index
+          index: '2dsphere'      // create the geospatial index
         },
         altitude: { type: Number },
         speed: { type: Number },
