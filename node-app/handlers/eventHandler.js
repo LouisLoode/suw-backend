@@ -43,20 +43,8 @@ const eventHandler = {
         // the raduis of Earth is approximately 6371 kilometers
         var rayon = maxDistance/6371;
 
-        // get coordinates [ <latitude> , <longitude> ]
-        // var coords = [];
-        // coords[0] = data.latitude;
-        // coords[1] = data.longitude;
-
         // find a location
         EventModel.find(
-          // {
-          //   location: {
-          //     $geoNear: coords,
-          //     $maxDistance: maxDistance
-          //   }
-          // }
-
           { location :
               {
                 $geoWithin : {
@@ -65,7 +53,7 @@ const eventHandler = {
           }
       ).limit(limit).exec(function(error, events) {
           if (error) {
-            // console.log(error);
+            console.log(error);
             return cb(error);
           }
           // console.log(events);

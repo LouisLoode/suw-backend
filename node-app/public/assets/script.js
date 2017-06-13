@@ -57,8 +57,10 @@ $('#add_event').submit(function(e) {
     $('#decription_event').val(''); // On vide les champ de texte
     $('#hashtag_event').val(''); // On vide les champ de texte
     if (event.name.trim().length !== 0 && event.user_id.trim().length !== 0 && event.latitude.trim().length !== 0 && event.longitude.trim().length !== 0) { // Gestion message vide
-      socket.emit('add_event', event);
-      alert('New event -> ' + event.name + ' at ['+event.latitude+', '+event.longitude+']')
+        socket.emit('add_event', event, function (data) {
+            console.log(data); // data will be 'woot'
+            alert('New event -> ' + event.name + ' at ['+event.latitude+', '+event.longitude+']')
+        });
     }
     $('#addEvent').modal('hide')
 });
@@ -75,4 +77,17 @@ function getCurrentLocation() {
 function showPosition(position) {
     $('#longitude_event').val(position.coords.longitude); // On vide les champ de texte
     $('#latitude_event').val(position.coords.latitude); // On vide les champ de texte
+}
+
+
+function getProximityEvents(){
+    var data = {
+      limit: 10,
+      distance: 10, // in km
+      latitude: 48.85275120000001,
+      longitude: 2.4278817999999998
+    };
+    socket.emit('fetch_events', data, function (data) {
+        console.log(data); // data
+    });
 }
