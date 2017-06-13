@@ -5,9 +5,11 @@ module.exports = function(io, config) {
   io.on('connection', function(socket){
     config.nbr_users += 1;
     console.log('user connected succesfully to the socket ...');
+    socket.emit('monitoring_users', {type: 'User connected'});  
 
     socket.on('disconnect', function(){
       config.nbr_users -= 1;
+      socket.emit('monitoring_users', {type: 'User disconnected'});
       console.log('user disconnected');
     });
 

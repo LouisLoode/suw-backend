@@ -2,13 +2,27 @@ const eventHandlers = require('../handlers/eventHandler');
 
 module.exports = function(socket) {
   socket.on('add_event', function (data, fn) {
-    eventHandlers.createEvent(data, (error, data) => {
+    eventHandlers.createEvent(data, (error, event) => {
       if (error) {
         console.log('Error during the creation of an event');
         fn(error);
       }else{
-        console.log('New event :'+data.name);
-        fn(data);
+        console.log('New event :'+event.name);
+        socket.emit('monitoring_events', {type: 'Add Event', event});
+        fn(event);
+      }
+    });
+  });
+
+  socket.on('vote_event', function (data, fn) {
+    eventHandlers.voteEvent(data, (error, event) => {
+      if (error) {
+        console.log('Error during the creation of an event');
+        fn(error);
+      }else{
+        console.log('New vote :'+event);
+        socket.emit('monitoring_events', {type: 'Vote Event', event});
+        fn(event);
       }
     });
   });
@@ -30,6 +44,7 @@ module.exports = function(socket) {
       else {
         fn(event);
         console.log("Fetch events:"+event.length);
+        socket.emit('monitoring_events', {type: 'Search Proximity Event', event});
       }
     });
   });

@@ -2,3 +2,22 @@ body {
   min-height: 2000px;
   padding-top: 70px;
 }
+
+samp {
+  background: #000;
+  border: 1px groove #ccc;
+  border-radius: 5px;
+  color: #ccc;
+  display: block;
+  opacity: 0.8;
+  padding: 5px;
+  width: 300px;
+}
+
+#search_events_return_box, #monitoring_users_list, #monitoring_events_list{
+  display: none;
+}
+
+.search_event{
+  width: auto !important;
+}

@@ -1,11 +1,28 @@
 // Socket part
 var socket = io(window.location.origin);
 
-socket.on('story', function (data) {
-    var div = document.getElementById("news-list");
+
+socket.on('monitoring_users', function (data) {
+    var div = document.getElementById("monitoring_users_list");
     console.log("Rendering story : ",data);
-    div.innerHTML += "<h3>" + data.title + ' <small>'+ data.date + "</small></h3><br>";
-    socket.emit('my other event', { my: 'data' });
+    $('#monitoring_users_list').fadeIn( "slow" );
+    if(data.user != undefined){
+        div.innerHTML += data.type+' : ' + data.user.model + ' (' + data.user.uuid + ') at ['+data.user.location[0]+', '+data.user.location[1]+']<br>';
+    } else {
+        div.innerHTML += data.type+' <br>';
+    }
+    
+});
+
+socket.on('monitoring_events', function (data) {
+    var div = document.getElementById("monitoring_events_list");
+    $('#monitoring_events_list').fadeIn( "slow" );
+    if(data.event != undefined){
+        div.innerHTML += data.type+' : ' + data.event.name + ' at ['+data.event.location[0]+', '+data.event.location[1]+']<br>';
+    } else {
+        div.innerHTML += data.type+' <br>';
+    }
+    
 });
 
 socket.on('monitoring', function (data) {
@@ -45,8 +62,8 @@ $('#add_event').submit(function(e) {
         type : $('#type_event').val(),
         decription : $('#description_event').val(),
         hashtag : $('#hashtag_event').val(),
-        longitude : $('#longitude_event').val(),
-        latitude : $('#latitude_event').val()
+        longitude : parseInt($('#longitude_event').val(), 10),
+        latitude : parseInt($('#latitude_event').val(), 10)
     }
     $('#user_id_event').val(''); // On vide les champ de texte
     $('#type_event').val(''); // On vide les champ de texte
@@ -56,13 +73,38 @@ $('#add_event').submit(function(e) {
     $('#name_event').val(''); // On vide les champ de texte
     $('#decription_event').val(''); // On vide les champ de texte
     $('#hashtag_event').val(''); // On vide les champ de texte
-    if (event.name.trim().length !== 0 && event.user_id.trim().length !== 0 && event.latitude.trim().length !== 0 && event.longitude.trim().length !== 0) { // Gestion message vide
+    if (event.name.trim().length !== 0 && event.user_id.trim().length !== 0 && event.latitude !== undefined && event.longitude !== undefined) { // Gestion message vide
         socket.emit('add_event', event, function (data) {
-            console.log(data); // data will be 'woot'
             alert('New event -> ' + event.name + ' at ['+event.latitude+', '+event.longitude+']')
         });
     }
     $('#addEvent').modal('hide')
+});
+
+// Search an event
+$('#search_events').submit(function(e) {
+    e.preventDefault(); // On évite le recharchement de la page lors de la validation du formulaire
+    // On crée notre objet JSON correspondant à notre message
+    var event = {
+        distance : parseInt($('#distance_search_event').val(), 10),
+        // limit : parseInt($('#limit_search_event').val(), 10),
+        longitude : parseInt($('#longitude_search_event').val(), 10),
+        latitude : parseInt($('#latitude_search_event').val(), 10)
+    }
+
+    if (event.longitude !== undefined && event.latitude !== undefined) { // Gestion message vide
+        socket.emit('fetch_events', event, function (data) {
+            // New event -> ' + event.name + ' at ['+event.latitude+', '+event.longitude+']
+            $('#search_events_return_box').fadeIn( "slow" );
+                var div = document.getElementById("search_events_list");
+                div.innerHTML += data.length+' event found <br/>';
+                for(var i=0; i<data.length ; i++) {
+                    div.innerHTML += 'event n°'+i+' : ' + data[i].name + ' at ['+data[i].location[0]+', '+data[i].location[1]+']<br>';
+                }
+        });
+
+    }
+    
 });
 
 // Get current location
@@ -77,17 +119,20 @@ function getCurrentLocation() {
 function showPosition(position) {
     $('#longitude_event').val(position.coords.longitude); // On vide les champ de texte
     $('#latitude_event').val(position.coords.latitude); // On vide les champ de texte
+
+    $('#longitude_search_event').val(position.coords.longitude); // On vide les champ de texte
+    $('#latitude_search_event').val(position.coords.latitude); // On vide les champ de texte
 }
 
 
-function getProximityEvents(){
-    var data = {
-      limit: 10,
-      distance: 10, // in km
-      latitude: 48.85275120000001,
-      longitude: 2.4278817999999998
-    };
-    socket.emit('fetch_events', data, function (data) {
-        console.log(data); // data
-    });
-}
+// function getProximityEvents(){
+//     var data = {
+//       limit: 10,
+//       distance: 10, // in km
+//       latitude: 48.85275120000001,
+//       longitude: 2.4278817999999998
+//     };
+//     socket.emit('fetch_events', data, function (data) {
+//         console.log(data); // data
+//     });
+// }
