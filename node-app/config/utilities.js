@@ -9,13 +9,6 @@ exports.randomString = (size) => {
 
 };
 
-// http://stackoverflow.com/a/29951992
-exports.isSubsetInArray = (source, target) => {
-
-    return !_.difference(_.flatten(source), _.flatten(target)).length;
-
-};
-
 exports.isValidObjectID = (str) => {
 
     // coerce to string so the function can be generically used to test both strings and native objectIds created by the driver

@@ -67,10 +67,10 @@ const eventHandler = {
       console.log(data);
       console.log("data in voteEvent => End");
       
-console.log("data.event_id",data.id_event);
+      // console.log("data.event_id",data.id_event);
        EventModel.findOne({ _id: data.id_event }, (error, event) => {
-        console.log('event',event);
-        console.log('error',error);
+        // console.log('event',event);
+        // console.log('error',error);
         if (error) {
             return cb(error);
         }
@@ -88,37 +88,22 @@ console.log("data.event_id",data.id_event);
                console.log(event);
                console.log('event ----------- end');
                
-                // if (selfUser.following.indexOf(userToFollow._id) === -1 || userToFollow.followers.indexOf(selfUser._id) === -1) {
-                //   console.log('Follow user');
-                //   userToFollow.followers.push(selfUser._id);
-                //   selfUser.following.push(userToFollow._id);
-                // } else {
-                //   console.log('Unfollow user');
-                //   userToFollow.followers.splice(userToFollow.followers.indexOf(selfUser._id), 1);
-                  // selfUser.following.splice(selfUser.following.indexOf(userToFollow._id), 1);
-                // }
                 if (event.upvotes.indexOf(data.id_user) === -1 && data.type === 'upvote') {
-                  console.log("Pas présent")
                   if (event.downvotes.indexOf(data.id_user) !== -1) {
                     event.downvotes.splice(data.id_user, 1);
                   }
                   event.upvotes.push(data.id_user);
                    
                 } else if (event.downvotes.indexOf(data.id_user) === -1 && data.type === 'downvote') {
-                  // if (event.upvotes.indexOf(data.id_user) === -1) {
-                  //   event.downvotes.push(data.id_user);
-                  // }
                   if (event.upvotes.indexOf(data.id_user) !== -1) {
                     event.upvotes.splice(data.id_user, 1);
                   }
                   event.downvotes.push(data.id_user);
 
                 } else {
-                  console.log('ON A RIEN MODIFIé')
+                  console.log('On a rien voté car un vote existe déjà');
                 }
-                console.log("Mon putain de nouvel event");
-                console.log(event);
-               // save the bear
+               // save the event
                event.save(function(error) {
                    if (error) {
                      console.log(error);
@@ -130,12 +115,6 @@ console.log("data.event_id",data.id_event);
               }
             }
         });
-
-            //return cb(error);
-        
-          // console.log(events);
-         // return cb(data);
-      
     },
 };
 

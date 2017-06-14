@@ -8,7 +8,7 @@ module.exports = function(app, config, server) {
   app.use(cors());
   // setup the logger
   app.use(morgan(':method :url :status :response-time ms - :res[content-length]'));
-	app.use( bodyParser.json() );
+	app.use(bodyParser.json());
 
 	// error handler
 	app.use(function(error, req, res, next) {

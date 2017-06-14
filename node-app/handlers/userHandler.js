@@ -6,8 +6,6 @@ const userHandler = {
 
     // Configurations files
     updateStory(data, cb) {
-      // console.log(data);
-      // console.log("user_id : "+data.user_id);
 
       //Fetch fetch current user
       UserModel.findOne({ _id: data.user_id }, (error, user) => {
@@ -16,14 +14,11 @@ const userHandler = {
               return cb(error);
           }
           else {
-              if (user.length === 0) {
+              if (!user) {
                  return cb('User Not Found');
               }
               else {
-                //  console.log('data ----------- begin');
-                //  console.log(data);
-                //  console.log('data ----------- end');
-                 user.location = [data.location[0], data.location[1]];  // [<longitude>, <latitude>]
+                 user.location = [data.location[0], data.location[1]];  // [<latitude>, <longitude>]
                  let informations = {
                      location: [data.location[0], data.location[1]],
                      altitude: data.altitude,
@@ -31,11 +26,9 @@ const userHandler = {
                      accuracy: data.accuracy,
                      date: new Date()
                  };
-                //  console.log('informations ----------- begin');
-                //  console.log(informations);
-                //  console.log('informations ----------- end');
+
                  user.story.push(informations);
-                 // save the bear
+                 // save the user
                  user.save(function(err) {
                      if (err) {
                        console.log(err);
@@ -50,8 +43,6 @@ const userHandler = {
     },
 
     login(req, res) {
-        // console.log('Login');
-        // console.log(req.body);
         if (!req.body.uuid) {
           res.status(400).json({success: false, msg: 'Please uuid is required.'});
         }
@@ -72,7 +63,7 @@ const userHandler = {
           },
           options = { upsert: true, new: true, setDefaultsOnInsert: true };
 
-          // Find the document
+          // Find the user
           UserModel.findOneAndUpdate(query, update, options, function(error, result) {
               // do something with the document
               if (error) { // Impossible

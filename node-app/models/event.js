@@ -22,6 +22,10 @@ const EventSchema = new Schema({
     hashtag: {
       type: String
     },
+    is_activate: {
+      type: Boolean,
+      default: true
+    },
     location: {
       type: [Number],  // [<longitude>, <latitude>]
       index: '2dsphere'      // create the geospatial index
