@@ -51,7 +51,7 @@ const eventHandler = {
                   $centerSphere : [ [ data.latitude, data.longitude ] , rayon ] }
               }
           }
-      ).limit(limit).exec(function(error, events) {
+      ).where('is_activate').equals(true).limit(limit).exec(function(error, events) {
           if (error) {
             console.log(error);
             return cb(error);

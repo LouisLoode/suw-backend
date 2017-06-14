@@ -15,6 +15,7 @@ const userHandler = {
           }
           else {
               if (!user) {
+                console.log('data =>' +data);
                  return cb('User Not Found');
               }
               else {

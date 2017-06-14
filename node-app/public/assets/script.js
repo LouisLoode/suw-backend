@@ -62,8 +62,8 @@ $('#add_event').submit(function(e) {
         type : $('#type_event').val(),
         decription : $('#description_event').val(),
         hashtag : $('#hashtag_event').val(),
-        longitude : parseInt($('#longitude_event').val(), 10),
-        latitude : parseInt($('#latitude_event').val(), 10)
+        longitude : parseFloat($('#longitude_event').val(), 10),
+        latitude : parseFloat($('#latitude_event').val(), 10)
     }
     $('#user_id_event').val(''); // On vide les champ de texte
     $('#type_event').val(''); // On vide les champ de texte
@@ -86,10 +86,10 @@ $('#search_events').submit(function(e) {
     e.preventDefault(); // On évite le recharchement de la page lors de la validation du formulaire
     // On crée notre objet JSON correspondant à notre message
     var event = {
-        distance : parseInt($('#distance_search_event').val(), 10),
+        distance : parseFloat($('#distance_search_event').val(), 10),
         // limit : parseInt($('#limit_search_event').val(), 10),
-        longitude : parseInt($('#longitude_search_event').val(), 10),
-        latitude : parseInt($('#latitude_search_event').val(), 10)
+        longitude : parseFloat($('#longitude_search_event').val(), 10),
+        latitude : parseFloat($('#latitude_search_event').val(), 10)
     }
 
     if (event.longitude !== undefined && event.latitude !== undefined) { // Gestion message vide
