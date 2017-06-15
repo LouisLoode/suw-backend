@@ -125,14 +125,27 @@ function showPosition(position) {
 }
 
 
-// function getProximityEvents(){
-//     var data = {
-//       limit: 10,
-//       distance: 10, // in km
-//       latitude: 48.85275120000001,
-//       longitude: 2.4278817999999998
-//     };
-//     socket.emit('fetch_events', data, function (data) {
-//         console.log(data); // data
-//     });
-// }
+function getProximityEvents(){
+    var data = {
+      limit: 10,
+      distance: 10, // in km
+      latitude: 48.85275120000001,
+      longitude: 2.4278817999999998
+    };
+    socket.emit('fetch_events', data, function (data) {
+        console.log(data); // data
+    });
+}
+
+
+function updatePositionUser(){
+    var data = {
+      limit: 10,
+      distance: 10, // in km
+      latitude: 48.85275120000001,
+      longitude: 2.4278817999999998
+    };
+    socket.emit('user', data, function (data) {
+        console.log(data); // data
+    });
+}
