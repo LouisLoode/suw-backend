@@ -80,9 +80,6 @@ const eventHandler = {
                return cb('Event Not Found');
             }
             else {
-               console.log('data ----------- begin');
-               console.log(data);
-               console.log('data ----------- end');
 
                console.log('event ----------- begin');
                console.log(event);
@@ -100,9 +97,9 @@ const eventHandler = {
                   }
                   event.downvotes.push(data.id_user);
 
-                  if (event.downvotes.length > event.downvotes.length){
-                    event.is_activate = false;                    
-                  }
+                  // if (event.downvotes.length > event.downvotes.length){
+                  //   event.is_activate = false;                    
+                  // }
 
                 } else {
                   console.log('On a rien voté car un vote existe déjà');
