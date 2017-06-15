@@ -35,7 +35,7 @@ const eventHandler = {
     },
 
     getProximityEvent(data, cb) {
-        var limit = data.limit || 15;
+        //var limit = data.limit || 15;
 
         // get the max distance or set it to 8 kilometers
         var maxDistance = data.distance || 1;
@@ -51,13 +51,13 @@ const eventHandler = {
                   $centerSphere : [ [ data.latitude, data.longitude ] , rayon ] }
               }
           }
-      ).where('is_activate').equals(true).limit(limit).exec(function(error, events) {
-          if (error) {
-            console.log(error);
-            return cb(error);
-          }
-          // console.log(events);
-          return cb(error, events);
+        ).where('is_activate').equals(true).exec(function(error, events) {
+            if (error) {
+              console.log(error);
+              return cb(error);
+            }
+            // console.log(events);
+            return cb(error, events);
         });
     },
 
@@ -99,6 +99,10 @@ const eventHandler = {
                     event.upvotes.splice(data.id_user, 1);
                   }
                   event.downvotes.push(data.id_user);
+
+                  if (event.downvotes.length > event.downvotes.length){
+                    event.is_activate = false;                    
+                  }
 
                 } else {
                   console.log('On a rien voté car un vote existe déjà');
