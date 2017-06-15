@@ -27,7 +27,7 @@ const EventSchema = new Schema({
       default: true
     },
     location: {
-      type: [Number],  // [<longitude>, <latitude>]
+      type: [Number],  // [<latitude>, <longitude>]
       index: '2dsphere'      // create the geospatial index
     },
     upvotes: [{type: Schema.ObjectId, ref: 'User'}],
